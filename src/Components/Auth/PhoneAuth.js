@@ -15,7 +15,7 @@ const PhoneAuth = ({ onCodeSent, phoneNumber: initialPhoneNumber }) => {
         e.preventDefault();
         const formattedPhoneNumber = formatPhoneNumber(phoneNumber);
         try {
-            await axios.post('http://localhost:3001/api/auth/register-login', { phoneNumber: formattedPhoneNumber });
+            await axios.post('http://45.12.73.68:3001/api/auth/register-login', { phoneNumber: formattedPhoneNumber });
             onCodeSent(formattedPhoneNumber);
         } catch (error) {
             console.error('Ошибка при отправке номера телефона:', error);

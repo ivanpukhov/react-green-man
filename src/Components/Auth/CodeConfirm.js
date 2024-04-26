@@ -16,7 +16,7 @@ const CodeConfirm = ({ phoneNumber, onPhoneNumberChange }) => {
         e.preventDefault();
         try {
             const cleanedCode = code.replace(/[^0-9]/g, ''); // Удаление тире и оставление только цифр
-            const response = await axios.post('http://localhost:3001/api/auth/confirm-code', {
+            const response = await axios.post('http://45.12.73.68:3001/api/auth/confirm-code', {
                 phoneNumber,
                 confirmationCode: cleanedCode
             });
@@ -43,7 +43,7 @@ const CodeConfirm = ({ phoneNumber, onPhoneNumberChange }) => {
 
     const resendCode = async () => {
         try {
-            await axios.post('http://localhost:3001/api/auth/resend-confirmation-code', { phoneNumber });
+            await axios.post('http://45.12.73.68:3001/api/auth/resend-confirmation-code', { phoneNumber });
         } catch (error) {
             console.error('Ошибка при повторной отправке кода:', error);
         }

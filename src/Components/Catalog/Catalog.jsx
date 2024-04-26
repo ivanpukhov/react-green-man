@@ -8,7 +8,7 @@ import { TailSpin } from 'react-loader-spinner';
 
 
 const Catalog = () => {
-    const API_URL = "http://localhost:3001/api/products";
+    const API_URL = "http://45.12.73.68:3001/api/products";
 
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);

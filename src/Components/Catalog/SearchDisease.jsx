@@ -13,7 +13,7 @@ const SearchDisease = () => {
     useEffect(() => {
         const fetchProductsByDisease = async () => {
             try {
-                const response = await axios.post(`http://localhost:3001/api/products/search/disease`, { disease: query });
+                const response = await axios.post(`http://45.12.73.68:3001/api/products/search/disease`, { disease: query });
                 setProducts(response.data);
                 setLoading(false);
             } catch (err) {

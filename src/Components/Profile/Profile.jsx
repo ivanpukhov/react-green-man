@@ -25,7 +25,7 @@ const Profile = () => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        axios.get('http://localhost:3001/api/profile/', { headers: { 'Authorization': `Bearer ${token}` } })
+        axios.get('http://45.12.73.68:3001/api/profile/', { headers: { 'Authorization': `Bearer ${token}` } })
             .then(response => setProfileData(response.data))
             .catch(error => {
                 console.error('Ошибка при получении данных профиля:', error);

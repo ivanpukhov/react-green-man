@@ -17,7 +17,7 @@ const ProductInfo = () => {
 
     useEffect(() => {
         setLoading(true);
-        axios.get(`http://localhost:3001/api/products/${id}`)
+        axios.get(`http://45.12.73.68:3001/api/products/${id}`)
             .then(response => {
                 setproduct(response.data);
                 setLoading(false);
