@@ -32,6 +32,7 @@ const CodeConfirm = ({ phoneNumber, onPhoneNumberChange }) => {
             });
 
 // Проверка вызова navigate
+            window.location.reload();
             navigate('/profile');
             console.log("Переход на /profile");
 
