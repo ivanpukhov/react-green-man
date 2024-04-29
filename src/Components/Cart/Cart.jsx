@@ -10,6 +10,8 @@ import charm_tick from "../../images/charm_tick.svg";
 import delivery__address from "../../images/delivery__address.png";
 import delivery__name from "../../images/delivery__name.png";
 import delivery__phone from "../../images/delivery__phone.png";
+import whatsappNumber from "../../images/whatsapp.png";
+import kaspi__phone from "../../images/kaspi.png";
 import indrive from "../../images/indrive.svg";
 import kaspi from "../../images/kaspi.svg";
 import kazpost from "../../images/kazpost-kaz.svg";
@@ -30,6 +32,7 @@ const Cart = () => {
     const [paymentMethod, setPaymentMethod] = useState('');
     const [customerName, setCustomerName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [kaspiNumber, setKaspiNumber] = useState('');
     const [street, setStreet] = useState('');
     const [houseNumber, setHouseNumber] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -65,6 +68,14 @@ const Cart = () => {
         return phoneNumber;
     };
 
+    const formatKaspiNumberForDisplay = (kaspiNumber) => {
+        const match = kaspiNumber.match(/^(\d{3})(\d{3})(\d{2})(\d{2})$/);
+        if (match) {
+            return `+7 (${match[1]}) ${match[2]}-${match[3]}-${match[4]}`;
+        }
+        return kaspiNumber;
+    };
+
 
     const handleProfileSelect = (profile) => {
         setCustomerName(profile.name);
@@ -73,6 +84,7 @@ const Cart = () => {
         setStreet(profile.street);
         setHouseNumber(profile.houseNumber);
         setPhoneNumber(formatPhoneNumberForDisplay(profile.phoneNumber));
+        setKaspiNumber(formatKaspiNumberForDisplay(profile.phoneNumber));
         setIsModalOpen(false);
     };
 
@@ -206,7 +218,11 @@ const Cart = () => {
         const formatPhoneNumberForServer = (phoneNumber) => {
             return phoneNumber.replace(/[^\d]/g, '').slice(1);
         };
+        const formatKaspiNumberForServer = (phoneNumber) => {
+            return phoneNumber.replace(/[^\d]/g, '').slice(1);
+        };
         const formattedPhoneNumber = formatPhoneNumberForServer(phoneNumber);
+        const formattedKaspiNumber = formatKaspiNumberForServer(kaspiNumber);
 
         const orderData = {
             customerName,
@@ -215,6 +231,7 @@ const Cart = () => {
             street,
             houseNumber,
             phoneNumber: formattedPhoneNumber,
+            kaspiNumber: formattedKaspiNumber,
             deliveryMethod,
             paymentMethod,
             products,
@@ -280,6 +297,7 @@ const Cart = () => {
                 <div className="cart__subtitle">Данные для доставки</div>
                 <form action="" className="delivery__form">
                     {/* Данные заказчика */}
+                    <b style={{'color': '#00AB6D'}}>Фамилия и имя</b>
                     <div className="delivery__item">
                         <label htmlFor="delivery__name">
                             <img src={delivery__name} alt=""/>
@@ -287,9 +305,10 @@ const Cart = () => {
                         <input type="text" placeholder="Фамилия и имя" id='delivery__name' value={customerName}
                                onChange={e => setCustomerName(e.target.value)}/>
                     </div>
+                    <b style={{'color': '#00AB6D'}}>Номер телефона Whatsapp</b>
                     <div className="delivery__item">
                         <label htmlFor="delivery__phone">
-                            <img src={delivery__phone} alt=""/>
+                            <img src={whatsappNumber} alt=""/>
                         </label>
                         <MaskedInput
                             mask={['+', '7', ' ', '(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
@@ -300,6 +319,21 @@ const Cart = () => {
                             onChange={e => setPhoneNumber(e.target.value)}
                         />
                     </div>
+                    <b style={{'color': 'red'}}>Номер телефона Kaspi для выставления счета</b>
+                    <div className="delivery__item">
+                        <label htmlFor="delivery__phone">
+                            <img src={kaspi__phone} alt=""/>
+                        </label>
+                        <MaskedInput
+                            mask={['+', '7', ' ', '(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
+                            placeholder="+7 (000) 000-00-00"
+                            guide={false}
+                            value={kaspiNumber}
+                            id='delivery__phone'
+                            onChange={e => setKaspiNumber(e.target.value)}
+                        />
+                    </div>
+                    <b style={{'color': '#00AB6D'}}>Город</b>
                     <div className="delivery__item">
                         <label htmlFor="delivery__city">
                             <img src={delivery__address} alt=""/>
@@ -322,6 +356,8 @@ const Cart = () => {
                             </ul>
                         )}
                     </div>
+                    <b style={{'color': '#00AB6D'}}>Улица</b>
+
                     <div className="delivery__item">
                         <label htmlFor="delivery__street">
                             <img src={delivery__address} alt=""/>
@@ -329,6 +365,8 @@ const Cart = () => {
                         <input type="text" placeholder="Улица" id="delivery__street" value={street}
                                onChange={e => setStreet(e.target.value)}/>
                     </div>
+                    <b style={{'color': '#00AB6D'}}>Номер дома</b>
+
                     <div className="delivery__item">
                         <label htmlFor="delivery__house">
                             <img src={delivery__address} alt=""/>
@@ -336,6 +374,8 @@ const Cart = () => {
                         <input type="text" placeholder="Номер дома" id='delivery__house' className="delivery__house"
                                value={houseNumber} onChange={e => setHouseNumber(e.target.value)}/>
                     </div>
+                    <b style={{'color': '#00AB6D'}}>Почтовый индекс </b>
+
                     <div className="delivery__item">
                         <label htmlFor="delivery__index">
                             <img src={delivery__address} alt=""/>

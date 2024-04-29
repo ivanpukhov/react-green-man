@@ -6,6 +6,7 @@ import icon from '../../images/profile.png';
 import profile__order from '../../images/profile__order.png';
 import { useAuth } from "../../AuthContext";
 import Banner from "../Banner/Banner";
+import {TailSpin} from "react-loader-spinner";
 
 const Track = (order) => {
     return (
@@ -133,8 +134,9 @@ const Profile = () => {
                     </div>
                 )
             ) : (
-                <div>Загрузка данных профиля...</div>
-            )}
+                <div className="loading"><TailSpin color="#00AB6D" height={80} width={80} /></div>
+
+                )}
             <Banner />
         </div>
     );
