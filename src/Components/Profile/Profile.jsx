@@ -23,7 +23,12 @@ const Profile = () => {
     const { logout } = useAuth();
     const [profileData, setProfileData] = useState(null);
     const [expandedOrders, setExpandedOrders] = useState({});
-
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/auth');
+        }
+    }, [navigate]);
     useEffect(() => {
         const token = localStorage.getItem('token');
         axios.get('/api/profile/', { headers: { 'Authorization': `Bearer ${token}` } })

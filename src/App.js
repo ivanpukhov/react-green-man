@@ -39,10 +39,9 @@ function App() {
                         <Route path="/catalog" element={<Catalog />} />
                         <Route path="/product/:id" element={<ProductInfo />} />
                         <Route path="/search/:type/:query" element={<Search />} />
-                        <Route path="/cart" element={isAuthenticated ? <Cart /> : <Auth />} />
 
-                        <Route path="/auth" element={isAuthenticated ? <Profile /> : <Auth />} />
-                        <Route path="/profile" element={isAuthenticated ? <Profile /> : <Auth />} />
+                        <Route path="/auth" element= { <Auth />} />
+                        <Route path="/profile" element={ <Profile /> } />
 
                         {/* Добавляем проверку для перенаправления */}
                         <Route

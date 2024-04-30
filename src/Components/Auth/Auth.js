@@ -1,15 +1,22 @@
 // Components/Auth/Auth.js
 
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import PhoneAuth from './PhoneAuth';
 import CodeConfirm from './CodeConfirm';
 import s from './scss/Login.module.scss'
 import {Helmet} from "react-helmet";
+import {useNavigate} from "react-router-dom";
 
 const Auth = () => {
     const [step, setStep] = useState(1); // 1 для PhoneAuth, 2 для CodeConfirm
     const [phoneNumber, setPhoneNumber] = useState('');
-
+    const navigate = useNavigate();
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            navigate('/profile');
+        }
+    }, [navigate]);
     const handleCodeSent = (phone) => {
         setPhoneNumber(phone);
         setStep(2);

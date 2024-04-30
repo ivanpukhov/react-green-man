@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Product from "./Product";
 import { Helmet } from "react-helmet";
-import { useLocation } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import { Empty } from 'antd';
 import { TailSpin } from 'react-loader-spinner';
+import back from "../../images/ion_arrow-back.svg";
 
 
 const Catalog = () => {
     const API_URL = "/api/products";
+    const navigate = useNavigate();
 
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -45,7 +47,14 @@ const Catalog = () => {
                     </Helmet>
                 </>
             )}
-
+            <div className="productInfo__header">
+                <div className="productInfo__header--back" onClick={() => navigate(-1)}>
+                    <img src={back} alt=""/>
+                </div>
+                <h1 className="productInfo__header--title">
+                    Каталог
+                </h1>
+            </div>
             {products.length > 0 ? (
                 products.map(product => (
                     <Product key={product.id} product={product} />
