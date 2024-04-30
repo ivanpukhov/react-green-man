@@ -8,6 +8,7 @@ import Banner from "../Banner/Banner";
 import * as PropTypes from "prop-types";
 import { Helmet } from 'react-helmet';
 import SearchBlock from "../Catalog/SearchBlock";
+import CatalogTop from "../Catalog/CatalogTop";
 
 
 
@@ -75,7 +76,7 @@ const Main = () => {
             </a>
             <h3 className="title__top"><span>Топ</span> товары</h3>
             <h4 className="subtitle__top">Часто покупаемые товары</h4>
-            <Catalog/>
+            <CatalogTop/>
             <Faq/>
             <Banner/>
         </>)
