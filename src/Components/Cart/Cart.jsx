@@ -41,12 +41,32 @@ const Cart = () => {
     const [deliveryProfiles, setDeliveryProfiles] = useState([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
+    const [isFormValid, setIsFormValid] = useState(false);
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (!token) {
             navigate('/auth');
         }
     }, [navigate]);
+
+    useEffect(() => {
+        const isPhoneNumberValid = phoneNumber.replace(/[^\d]/g, '').length === 11;
+        const isKaspiNumberValid = kaspiNumber.replace(/[^\d]/g, '').length === 11;
+        const isPostalCodeValid = postalCode.length === 6;
+        const isCityValid = inputValue.trim() !== '';
+        const isStreetValid = street.trim() !== '';
+        const isHouseNumberValid = houseNumber.trim() !== '';
+
+        setIsFormValid(
+            isPhoneNumberValid &&
+            isKaspiNumberValid &&
+            isPostalCodeValid &&
+            isCityValid &&
+            isStreetValid &&
+            isHouseNumberValid
+        );
+    }, [phoneNumber, kaspiNumber, postalCode, inputValue, street, houseNumber]);
+
 
     useEffect(() => {
         const fetchDeliveryProfiles = async () => {
@@ -272,6 +292,8 @@ const Cart = () => {
             });
         }
     };
+
+
 
     return (
         <div>
@@ -502,7 +524,7 @@ const Cart = () => {
                         </div>
                     </div>
 
-                    <div className="cart__btn" onClick={!isSubmitting ? handleOrderSubmit : null}>
+                    <div className="cart__btn" onClick={isFormValid && !isSubmitting ? handleOrderSubmit : null}>
                         {isSubmitting ? 'Отправка...' : 'Оформить заказ'}
                     </div>
                 </form>
