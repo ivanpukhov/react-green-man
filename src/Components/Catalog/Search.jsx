@@ -15,7 +15,7 @@ const Search = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const url = `http://45.12.73.68:3001/api/products/search/${query}?type=${type}`;
+                const url = `http:///api/products/search/${query}?type=${type}`;
                 const response = await axios.get(url);
                 setProducts(response.data);
                 setLoading(false);

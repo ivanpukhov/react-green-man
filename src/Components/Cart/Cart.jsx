@@ -20,7 +20,7 @@ import money from "../../images/money.svg";
 import Banner from "../Banner/Banner";
 import cityData from './cityData';
 import Swal from 'sweetalert2';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const Cart = () => {
     const {isAuthenticated} = useAuth();
@@ -38,6 +38,13 @@ const Cart = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [deliveryProfiles, setDeliveryProfiles] = useState([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const navigate = useNavigate();
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/auth');
+        }
+    }, [navigate]);
 
     useEffect(() => {
         const fetchDeliveryProfiles = async () => {
@@ -47,7 +54,7 @@ const Cart = () => {
             console.log(localStorage.token)
             if (isAuthenticated) {
                 try {
-                    const response = await axios.get(`http://45.12.73.68:3001/api/order-profiles/user/${localStorage.userId}`, config);
+                    const response = await axios.get(`http:///api/order-profiles/user/${localStorage.userId}`, config);
                     if (response.data.length > 0) {
                         setDeliveryProfiles(response.data);
                         setIsModalOpen(true);
@@ -241,7 +248,7 @@ const Cart = () => {
         try {
             const token = localStorage.getItem('token');
             const config = token ? {headers: {Authorization: `Bearer ${token}`}} : {};
-            await axios.post('http://45.12.73.68:3001/api/orders/add', orderData, config);
+            await axios.post('http:///api/orders/add', orderData, config);
             setIsSubmitting(false);
             clearCart();
             Swal.fire({
