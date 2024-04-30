@@ -263,6 +263,21 @@ h6 {
   min-height: calc(100vh - 80px);
 }
 
+.suggestions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 5px;
+  li{
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #00AB6D;
+  }
+}
+
 .logo {
   display: flex;
   align-items: center;
