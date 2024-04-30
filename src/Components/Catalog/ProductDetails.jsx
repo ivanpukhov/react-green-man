@@ -7,6 +7,7 @@ import adults from '../../images/adults.png'
 import FaqItem from "../FaqItem/FaqItem";
 import AddToCartControl from "./AddToCartControl";
 import {Helmet} from "react-helmet";
+import ScrollToTop from "../ScrollToTop";
 
 const ProductInfo = () => {
     const [product, setproduct] = useState(null);
@@ -70,7 +71,7 @@ const ProductInfo = () => {
                 <meta name="robots" content="index, follow"/>
                 <meta name="author" content="Greenman"/>
             </Helmet>
-
+            <ScrollToTop />
             <div className="productInfo__header">
                 <div className="productInfo__header--back" onClick={() => navigate(-1)}>
                     <img src={back} alt=""/>
