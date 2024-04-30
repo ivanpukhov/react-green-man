@@ -21,8 +21,10 @@ import Banner from "../Banner/Banner";
 import cityData from './cityData';
 import Swal from 'sweetalert2';
 import {Link, useNavigate} from "react-router-dom";
+import ScrollToTop from "../ScrollToTop";
 
 const Cart = () => {
+
     const {isAuthenticated} = useAuth();
     const {cart, removeFromCart, updateQuantity, clearCart} = useCart();
     const [inputValue, setInputValue] = useState('');
@@ -98,6 +100,9 @@ const Cart = () => {
     if (cart.length === 0) {
         return (
             <div className="cart__n">
+
+                <ScrollToTop />
+
                 <div className="cart__null">
                     <div className="cart__null-title">
                         Ваша корзина пуста
@@ -270,6 +275,8 @@ const Cart = () => {
 
     return (
         <div>
+            <ScrollToTop />
+
             <div className="cart__title">
                 <h2 className="cart__h2">Корзина</h2>
                 <div className="cart__q">{result}</div>

@@ -7,6 +7,7 @@ import profile__order from '../../images/profile__order.png';
 import { useAuth } from "../../AuthContext";
 import Banner from "../Banner/Banner";
 import {TailSpin} from "react-loader-spinner";
+import ScrollToTop from "../ScrollToTop";
 
 const Track = (order) => {
     return (
@@ -56,6 +57,8 @@ const Profile = () => {
 
     return (
         <div>
+            <ScrollToTop />
+
             {profileData ? (
                 profileData.orders.length > 0 ? (
                     <div className="profile">
