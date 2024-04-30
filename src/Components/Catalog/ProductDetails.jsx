@@ -17,7 +17,7 @@ const ProductInfo = () => {
 
     useEffect(() => {
         setLoading(true);
-        axios.get(`http://api/products/${id}`)
+        axios.get(`/api/products/${id}`)
             .then(response => {
                 setproduct(response.data);
                 setLoading(false);

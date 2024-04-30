@@ -54,7 +54,7 @@ const Cart = () => {
             console.log(localStorage.token)
             if (isAuthenticated) {
                 try {
-                    const response = await axios.get(`http://api/order-profiles/user/${localStorage.userId}`, config);
+                    const response = await axios.get(`/api/order-profiles/user/${localStorage.userId}`, config);
                     if (response.data.length > 0) {
                         setDeliveryProfiles(response.data);
                         setIsModalOpen(true);
@@ -248,7 +248,7 @@ const Cart = () => {
         try {
             const token = localStorage.getItem('token');
             const config = token ? {headers: {Authorization: `Bearer ${token}`}} : {};
-            await axios.post('http://api/orders/add', orderData, config);
+            await axios.post('/api/orders/add', orderData, config);
             setIsSubmitting(false);
             clearCart();
             Swal.fire({
