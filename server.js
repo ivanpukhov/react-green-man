@@ -57,6 +57,17 @@ const getUrls = async () => {
 app.use(expressSitemapXml(getUrls, 'https://greenman.kz'))
 app.use(express.static(path.join(__dirname, 'build')));
 
+app.get('*', (req, res, next) => {
+  if (req.url === '/sitemap.xml') {
+      res.header('Content-Type', 'application/xml');
+      res.sendFile(path.join(__dirname, 'sitemap.xml'));
+
+  } else {
+    // Предоставление index.html для остальных маршрутов
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  }
+});
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
