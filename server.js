@@ -1,10 +1,12 @@
+
 const express = require('express');
 const path = require('path');
-const expressSitemapXml = require("express-sitemap-xml");
+const expressSitemapXml = require('express-sitemap-xml');
+const compression = require('compression');
 
 const app = express();
 
-
+// Предопределенный список URL для карты сайта
 const getUrls = async () => {
   return [
     '/',
@@ -36,13 +38,8 @@ const getUrls = async () => {
     '/product/22',
     '/product/23',
     '/product/24',
-    '/product/25',
     '/product/26',
     '/product/27',
-    '/product/28',
-    '/product/29',
-    '/product/30',
-    '/product/31',
     '/product/32',
     '/product/33',
     '/product/34',
@@ -50,24 +47,29 @@ const getUrls = async () => {
     '/product/36',
     '/product/37',
     '/product/38',
-    '/search/type/query'
   ];
 };
 
-app.use(expressSitemapXml(getUrls, 'https://greenman.kz'))
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(compression()); // Сжатие всех HTTP ответов
+app.use(expressSitemapXml(getUrls, 'https://greenman.kz')); // Генерация Sitemap
 
-app.get('*', (req, res, next) => {
-  if (req.url === '/sitemap.xml') {
-      res.header('Content-Type', 'application/xml');
-      res.sendFile(path.join(__dirname, 'sitemap.xml'));
-
-  } else {
-    // Предоставление index.html для остальных маршрутов
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// Настройка кэширования статических файлов
+app.use(express.static(path.join(__dirname, 'build'), {
+  etag: true, // Использование ETag для кэширования
+  lastModified: true, // Использование заголовка Last-Modified
+  setHeaders: (res, path) => {
+    if (express.static.mime.lookup(path) === 'text/html') {
+      res.setHeader('Cache-Control', 'public, max-age=0'); // Исключение HTML из кэширования
+    } else {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable'); // Кэширование остальных статических ресурсов на год
+    }
   }
-});
+}));
 
+// Перенаправление всех запросов на index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

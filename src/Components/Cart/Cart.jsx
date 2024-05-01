@@ -49,6 +49,19 @@ const Cart = () => {
         }
     }, [navigate]);
 
+    const handleClick = () => {
+        if (!isFormValid || isSubmitting) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Ошибка',
+                text: 'Не все обязательные поля заполнены или не выбраны способы доставки и оплаты.'
+            });
+        } else {
+            handleOrderSubmit();
+        }
+    };
+
+
     useEffect(() => {
         const isPhoneNumberValid = phoneNumber.replace(/[^\d]/g, '').length === 11;
         const isKaspiNumberValid = kaspiNumber.replace(/[^\d]/g, '').length === 11;
@@ -56,6 +69,8 @@ const Cart = () => {
         const isCityValid = inputValue.trim() !== '';
         const isStreetValid = street.trim() !== '';
         const isHouseNumberValid = houseNumber.trim() !== '';
+        const isPaymentMethodSelected = paymentMethod !== '';
+        const isDeliveryMethodSelected = deliveryMethod !== '';
 
         setIsFormValid(
             isPhoneNumberValid &&
@@ -63,9 +78,11 @@ const Cart = () => {
             isPostalCodeValid &&
             isCityValid &&
             isStreetValid &&
-            isHouseNumberValid
+            isHouseNumberValid &&
+            isPaymentMethodSelected &&
+            isDeliveryMethodSelected
         );
-    }, [phoneNumber, kaspiNumber, postalCode, inputValue, street, houseNumber]);
+    }, [phoneNumber, kaspiNumber, postalCode, inputValue, street, houseNumber, paymentMethod, deliveryMethod]);
 
 
     useEffect(() => {
@@ -524,9 +541,11 @@ const Cart = () => {
                         </div>
                     </div>
 
-                    <div className="cart__btn" onClick={isFormValid && !isSubmitting ? handleOrderSubmit : null}>
+                    <div className={`cart__btn ${isFormValid && !isSubmitting ? '' : 'disabled'}`} onClick={handleClick}>
                         {isSubmitting ? 'Отправка...' : 'Оформить заказ'}
                     </div>
+
+
                 </form>
             </div>
 

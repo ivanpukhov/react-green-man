@@ -278,6 +278,12 @@ h6 {
   }
 }
 
+.disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+
 .logo {
   display: flex;
   align-items: center;
