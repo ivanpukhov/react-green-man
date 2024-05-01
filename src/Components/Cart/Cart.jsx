@@ -245,13 +245,28 @@ const Cart = () => {
     };
 
     const calculateDeliveryCost = () => {
-        if (deliveryMethod === 'indrive') {
-            return 0;
-        } else if (deliveryMethod === 'kazpost') {
-            return  (totalItemsInCart - 1);
+        if (deliveryMethod === 'kazpost') {
+            // Считаем общий объем в мл
+            const totalVolume = cart.reduce((sum, item) => {
+                const volume = parseInt(item.type.type.split(' ')[1], 10); // Берем числовое значение объема из типа товара
+                return sum + volume * item.quantity; // Умножаем объем на количество товара в корзине
+            }, 0);
+
+            // Расчет стоимости доставки
+            const basePrice = 1600; // Базовая стоимость за первые 1000 мл
+            if (totalVolume <= 1000) {
+                return basePrice; // Если объем не превышает 1000 мл, возвращаем базовую стоимость
+            } else {
+                const extraVolume = totalVolume - 1000; // Вычисляем объем сверх базовых 1000 мл
+                const extraCost = Math.ceil(extraVolume / 1000) * 600; // Добавляем 600 тг за каждые дополнительные 1000 мл
+                return basePrice + extraCost; // Возвращаем итоговую стоимость доставки
+            }
+        } else if (deliveryMethod === 'indrive') {
+            return 0; // Для InDrive стоимость доставки 0
         }
-        return 600;
+        return 600; // Стандартная стоимость доставки для других методов
     };
+
 
     const totalCost = cart.reduce((total, item) => total + item.type.price * item.quantity, 0);
     const deliveryCost = calculateDeliveryCost();
