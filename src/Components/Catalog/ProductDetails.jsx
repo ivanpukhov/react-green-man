@@ -50,7 +50,6 @@ const ProductInfo = () => {
     };
 
 
-
     return (
         <div className="productInfo">
             <Helmet>
@@ -71,7 +70,7 @@ const ProductInfo = () => {
                 <meta name="robots" content="index, follow"/>
                 <meta name="author" content="Greenman"/>
             </Helmet>
-            <ScrollToTop />
+            <ScrollToTop/>
             <div className="productInfo__header">
                 <div className="productInfo__header--back" onClick={() => navigate(-1)}>
                     <img src={back} alt=""/>
@@ -106,7 +105,7 @@ const ProductInfo = () => {
             <div className="productInfo__desc mt42 contraindications">
                 <h2 className="productInfo__desc--title">Противопоказания</h2>
                 <ul className='diseases'>
-                        <li  className="disease ">{product.contraindications}</li>
+                    <li className="disease ">{product.contraindications}</li>
                 </ul>
 
             </div>
@@ -117,7 +116,6 @@ const ProductInfo = () => {
             <div className="product__add">
                 <AddToCartControl product={product}/>
             </div>
-
 
 
         </div>

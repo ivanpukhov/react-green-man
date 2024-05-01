@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import logoutImg from '../../images/logout.svg';
 import icon from '../../images/profile.png';
 import profile__order from '../../images/profile__order.png';
-import { useAuth } from "../../AuthContext";
+import {useAuth} from "../../AuthContext";
 import Banner from "../Banner/Banner";
 import {TailSpin} from "react-loader-spinner";
 import ScrollToTop from "../ScrollToTop";
@@ -21,7 +21,7 @@ const Track = (order) => {
 
 const Profile = () => {
     const navigate = useNavigate();
-    const { logout } = useAuth();
+    const {logout} = useAuth();
     const [profileData, setProfileData] = useState(null);
     const [expandedOrders, setExpandedOrders] = useState({});
     useEffect(() => {
@@ -32,7 +32,7 @@ const Profile = () => {
     }, [navigate]);
     useEffect(() => {
         const token = localStorage.getItem('token');
-        axios.get('/api/profile/', { headers: { 'Authorization': `Bearer ${token}` } })
+        axios.get('/api/profile/', {headers: {'Authorization': `Bearer ${token}`}})
             .then(response => setProfileData(response.data))
             .catch(error => {
                 console.error('Ошибка при получении данных профиля:', error);
@@ -57,21 +57,21 @@ const Profile = () => {
 
     return (
         <div>
-            <ScrollToTop />
+            <ScrollToTop/>
 
             {profileData ? (
                 profileData.orders.length > 0 ? (
                     <div className="profile">
                         <div className="profile__top">
                             <div className="profile__img">
-                                <img src={icon} alt="" />
+                                <img src={icon} alt=""/>
                             </div>
                             <div className="profile__number">
                                 Профиль
                                 <p>+7{profileData.phoneNumber}</p>
                             </div>
                             <div className="profile__img" onClick={handleLogout}>
-                                <img src={logoutImg} alt="" />
+                                <img src={logoutImg} alt=""/>
                             </div>
                         </div>
                         <div className="profile__title">
@@ -81,8 +81,9 @@ const Profile = () => {
                             {profileData.orders.map(order => (
                                 <div key={order.id}
                                      className={`profile__order ${expandedOrders[order.id] ? 'expanded' : ''}`}>
-                                    <div className="profile__order-status" onClick={() => toggleOrderVisibility(order.id)}>
-                                        <img src={profile__order} alt="" className="img-pulse" />
+                                    <div className="profile__order-status"
+                                         onClick={() => toggleOrderVisibility(order.id)}>
+                                        <img src={profile__order} alt="" className="img-pulse"/>
                                         <div className="profile__acc">
                                             {expandedOrders[order.id] ? '–' : '+'}
                                         </div>
@@ -119,7 +120,7 @@ const Profile = () => {
                                                     <div className="profile-bottom__title">Сумма заказа</div>
                                                     <div className="profile-bottom__text">{order.totalPrice} ₸</div>
                                                 </div>
-                                                {order.trackingNumber !== null && <Track order={order} />}
+                                                {order.trackingNumber !== null && <Track order={order}/>}
                                             </div>
                                         </div>
                                     )}
@@ -134,7 +135,8 @@ const Profile = () => {
                                 У вас еще нет заказов
                             </div>
                             <div className="cart__null-text">
-                                Выберите товар в каталоге, либо введите название товара или болезни в поиске, и выберите то, что поможет именно Вам!
+                                Выберите товар в каталоге, либо введите название товара или болезни в поиске, и выберите
+                                то, что поможет именно Вам!
                             </div>
                             <Link to={'/'} className="cart__null--btn">На главную</Link>
                             <Link to={'/catalog'} className="cart__null--btn">Перейти в каталог</Link>
@@ -142,10 +144,10 @@ const Profile = () => {
                     </div>
                 )
             ) : (
-                <div className="loading"><TailSpin color="#00AB6D" height={80} width={80} /></div>
+                <div className="loading"><TailSpin color="#00AB6D" height={80} width={80}/></div>
 
-                )}
-            <Banner />
+            )}
+            <Banner/>
         </div>
     );
 };

@@ -8,14 +8,14 @@ import Cart from "./Components/Cart/Cart";
 import Auth from './Components/Auth/Auth';
 import Profile from './Components/Profile/Profile';
 import './App.scss';
-import { useAuth } from "./AuthContext";
+import {useAuth} from "./AuthContext";
 import ProductInfo from "./Components/Catalog/ProductDetails";
 import Catalog from "./Components/Catalog/Catalog";
 import ScrollToTop from "./Components/ScrollToTop";
 import Search from "./Components/Catalog/Search";
 
 function App() {
-    const { isAuthenticated } = useAuth();
+    const {isAuthenticated} = useAuth();
 
     // Функция для проверки начала пути
     const checkPath = (path) => {
@@ -30,18 +30,18 @@ function App() {
     return (
         <div className="App">
             <Router>
-                <ScrollToTop />
-                <Header />
+                <ScrollToTop/>
+                <Header/>
                 <div className="container">
                     <Routes>
-                        <Route path="/" element={<Main />} />
-                        <Route path="/cart" element={<Cart />} />
-                        <Route path="/catalog" element={<Catalog />} />
-                        <Route path="/product/:id" element={<ProductInfo />} />
-                        <Route path="/search/:type/:query" element={<Search />} />
+                        <Route path="/" element={<Main/>}/>
+                        <Route path="/cart" element={<Cart/>}/>
+                        <Route path="/catalog" element={<Catalog/>}/>
+                        <Route path="/product/:id" element={<ProductInfo/>}/>
+                        <Route path="/search/:type/:query" element={<Search/>}/>
 
-                        <Route path="/auth" element= { <Auth />} />
-                        <Route path="/profile" element={ <Profile /> } />
+                        <Route path="/auth" element={<Auth/>}/>
+                        <Route path="/profile" element={<Profile/>}/>
 
                         {/* Добавляем проверку для перенаправления */}
                         <Route
@@ -49,13 +49,13 @@ function App() {
                             element={
                                 checkPath(window.location.pathname) ? (
                                     redirectToExternalSite(window.location.pathname)
-                                ) : <NotFoundPage />
+                                ) : <NotFoundPage/>
                             }
                         />
                     </Routes>
                 </div>
-                <Footer />
-                <BottomBar />
+                <Footer/>
+                <BottomBar/>
             </Router>
         </div>
     );

@@ -2,14 +2,11 @@ import './Main.scss'
 import circe from '../../images/natural-circle.svg'
 import about from '../../images/about.png'
 import stories from '../../images/bottom_bar/stories.png'
-import Catalog from "../Catalog/Catalog";
 import Faq from "../Faq/Faq";
 import Banner from "../Banner/Banner";
-import * as PropTypes from "prop-types";
-import { Helmet } from 'react-helmet';
+import {Helmet} from 'react-helmet';
 import SearchBlock from "../Catalog/SearchBlock";
 import CatalogTop from "../Catalog/CatalogTop";
-
 
 
 const Main = () => {
@@ -17,16 +14,21 @@ const Main = () => {
         <>
             <Helmet>
                 <title>Greenman - Лечебные настойки, соки сиропы лекарственных растений</title>
-                <meta name="description" content="Откройте для себя натуральные соки, настойки и экстракты из лечебных трав, корней, семян и плодов для поддержания вашего здоровья. Получите бесплатную консультацию для подбора продукции, идеально подходящей именно вам, основываясь на вашем диагнозе. Позаботьтесь о своем здоровье с нашими эксклюзивными продуктами" />
-                <meta name="keywords" content="лечебные настойки, натуральные соки, сиропы лекарственных растений, экстракты трав, поддержание здоровья, натуральные продукты, лекарственные травы, консультации по здоровью, натуральная медицина, здоровье и благополучие, greenman " />
+                <meta name="description"
+                      content="Откройте для себя натуральные соки, настойки и экстракты из лечебных трав, корней, семян и плодов для поддержания вашего здоровья. Получите бесплатную консультацию для подбора продукции, идеально подходящей именно вам, основываясь на вашем диагнозе. Позаботьтесь о своем здоровье с нашими эксклюзивными продуктами"/>
+                <meta name="keywords"
+                      content="лечебные настойки, натуральные соки, сиропы лекарственных растений, экстракты трав, поддержание здоровья, натуральные продукты, лекарственные травы, консультации по здоровью, натуральная медицина, здоровье и благополучие, greenman "/>
 
                 {/* Open Graph tags */}
-                <meta property="og:title" content="Greenman - Лечебные настойки, соки и сиропы лекарственных растений" />
-                <meta property="og:description" content="Откройте для себя натуральные соки, настойки и экстракты из лечебных трав, корней, семян и плодов для поддержания вашего здоровья. Получите бесплатную консультацию для подбора продукции, идеально подходящей именно вам, основываясь на вашем диагнозе. Позаботьтесь о своем здоровье с нашими эксклюзивными продуктами." />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://greenman.kz/" /> {/* Замените ВАШ_САЙТ/путь_страницы на актуальный URL вашей страницы */}
-                <meta property="og:image" content="https://greenman.kz/favicon.ico" /> {/* Укажите URL изображения, которое лучше всего описывает страницу */}
-                <meta property="og:site_name" content="Greenman" />
+                <meta property="og:title" content="Greenman - Лечебные настойки, соки и сиропы лекарственных растений"/>
+                <meta property="og:description"
+                      content="Откройте для себя натуральные соки, настойки и экстракты из лечебных трав, корней, семян и плодов для поддержания вашего здоровья. Получите бесплатную консультацию для подбора продукции, идеально подходящей именно вам, основываясь на вашем диагнозе. Позаботьтесь о своем здоровье с нашими эксклюзивными продуктами."/>
+                <meta property="og:type" content="website"/>
+                <meta property="og:url" content="https://greenman.kz/"/>
+                {/* Замените ВАШ_САЙТ/путь_страницы на актуальный URL вашей страницы */}
+                <meta property="og:image" content="https://greenman.kz/favicon.ico"/>
+                {/* Укажите URL изображения, которое лучше всего описывает страницу */}
+                <meta property="og:site_name" content="Greenman"/>
             </Helmet>
 
             <div className="banner">
@@ -42,7 +44,7 @@ const Main = () => {
                     </h1>
 
                 </div>
-                <SearchBlock />
+                <SearchBlock/>
             </div>
             <div className="about">
                 <div className="about__text">

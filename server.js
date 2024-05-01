@@ -1,4 +1,3 @@
-
 const express = require('express');
 const path = require('path');
 const expressSitemapXml = require('express-sitemap-xml');
@@ -50,13 +49,16 @@ const getUrls = async () => {
   ];
 };
 
-app.use(compression()); // Сжатие всех HTTP ответов
-app.use(expressSitemapXml(getUrls, 'https://greenman.kz')); // Генерация Sitemap
+// Middleware для сжатия HTTP ответов
+app.use(compression());
 
-// Настройка кэширования статических файлов
+// Middleware для генерации Sitemap.xml
+app.use(expressSitemapXml(getUrls, 'https://greenman.kz'));
+
+// Обслуживание статических файлов
 app.use(express.static(path.join(__dirname, 'build'), {
-  etag: true, // Использование ETag для кэширования
-  lastModified: true, // Использование заголовка Last-Modified
+  etag: true, // Включение ETag для кэширования
+  lastModified: true, // Включение заголовка Last-Modified
   setHeaders: (res, path) => {
     if (express.static.mime.lookup(path) === 'text/html') {
       res.setHeader('Cache-Control', 'public, max-age=0'); // Исключение HTML из кэширования
@@ -66,11 +68,18 @@ app.use(express.static(path.join(__dirname, 'build'), {
   }
 }));
 
+// Обслуживание файла robots.txt
+app.get('/robots.txt', (req, res) => {
+  res.type('text/plain');
+  res.sendFile(path.join(__dirname, 'build', 'robots.txt'));
+});
+
 // Перенаправление всех запросов на index.html
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
+// Запуск сервера
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);

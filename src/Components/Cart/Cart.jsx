@@ -9,7 +9,6 @@ import iconPlus from "../../images/bottom_bar/Icon-plus.svg";
 import charm_tick from "../../images/charm_tick.svg";
 import delivery__address from "../../images/delivery__address.png";
 import delivery__name from "../../images/delivery__name.png";
-import delivery__phone from "../../images/delivery__phone.png";
 import whatsappNumber from "../../images/whatsapp.png";
 import kaspi__phone from "../../images/kaspi.png";
 import indrive from "../../images/indrive.svg";
@@ -138,7 +137,7 @@ const Cart = () => {
         return (
             <div className="cart__n">
 
-                <ScrollToTop />
+                <ScrollToTop/>
 
                 <div className="cart__null">
                     <div className="cart__null-title">
@@ -326,10 +325,9 @@ const Cart = () => {
     };
 
 
-
     return (
         <div>
-            <ScrollToTop />
+            <ScrollToTop/>
 
             <div className="cart__title">
                 <h2 className="cart__h2">Корзина</h2>
@@ -556,7 +554,8 @@ const Cart = () => {
                         </div>
                     </div>
 
-                    <div className={`cart__btn ${isFormValid && !isSubmitting ? '' : 'disabled'}`} onClick={handleClick}>
+                    <div className={`cart__btn ${isFormValid && !isSubmitting ? '' : 'disabled'}`}
+                         onClick={handleClick}>
                         {isSubmitting ? 'Отправка...' : 'Оформить заказ'}
                     </div>
 
