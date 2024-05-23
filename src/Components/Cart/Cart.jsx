@@ -263,7 +263,7 @@ const Cart = () => {
                 return basePrice;
             } else {
                 const extraVolume = totalVolume - 1000;
-                const extraCost = Math.ceil(extraVolume / 1000) * 600;
+                const extraCost = Math.ceil(extraVolume / 1000) * 400;
                 return basePrice + extraCost;
             }
         } else if (deliveryMethod === 'indrive') {
